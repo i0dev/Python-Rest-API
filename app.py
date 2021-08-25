@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return jsonify({"welcome": "There isn't anything here, YET! For now requests can be made through the normal endpoints."})
-
+ 
 
 def saveAuth(list, id):
     writeFile = open("storage.json", 'w')
