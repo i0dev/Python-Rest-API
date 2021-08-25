@@ -34,26 +34,26 @@ def getAuth(id):
     for inter in storageObject:
         AUTH_LIST.append(inter)
 
-    ## Handle Request
+    # Handle Request
 
-    #Post
+    # Post
     if request.method == 'POST':
         if (content == None or content != POST_AUTH_SECRET):
             return jsonify({"result": "Your POST request secret is invalid!"}), 401
         saveAuth(AUTH_LIST, id)
         return jsonify({"result": "Sucsessfully added the id="+str(id)+" to the authentication list"}), 200
 
-    #Get
+    # Get
     content = request.headers.get("secret")
-    print (content)
+    print(content)
 
     if (content == None or content != GET_AUTH_SECRET):
         return jsonify({"result": "Your GET request secret is invalid!"}), 401
-    
+
     if (AUTH_LIST.__contains__(id)):
-        return jsonify({"result": "Sucsess. The ID provided is verified."}), 200
+        return jsonify({"result": "Sucsess. The ID provided is verified.", "access": True}), 200
     else:
-        return jsonify({"result": "Failure. The ID prodivded is NOT verified."}), 200
+        return jsonify({"result": "Failure. The ID prodivded is NOT verified.", "access": False}), 200
 
 
 if __name__ == '__main__':
